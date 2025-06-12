@@ -7,10 +7,10 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./jenkins.yaml:/var/jenkins_home/jenkins.yml
+      - ./jenkins.yaml:/usr/share/jenkins/ref/jenkins.yml
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
-      - CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yml
+      - CASC_JENKINS_CONFIG=/usr/share/jenkins/ref/jenkins.yml
       - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
