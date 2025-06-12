@@ -1,0 +1,9 @@
+ansicolor
+configuration-as-code
+git
+github
+github-branch-source
+job-dsl
+nodejs
+workflow-aggregator
+workflow-multibranch

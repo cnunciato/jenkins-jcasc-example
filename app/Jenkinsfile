@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs "Node 22.x"
+    }
+
+    options {
+        ansiColor('xterm')
+    }
+
+    environment {
+        APP_DIR = 'app'
+    }
+
+    stages {
+        stage('Install') {
+            steps {
+                dir(env.APP_DIR) {
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir(env.APP_DIR) {
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,94 @@
+jenkins:
+  numExecutors: 0
+  mode: NORMAL
+
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+  
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: ${ADMIN_USERNAME}
+          password: ${ADMIN_PASSWORD}
+  
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  
+  remotingSecurity:
+    enabled: true
+
+  nodes:
+    - permanent:
+        name: "agent1"
+        launcher: "inbound"
+        remoteFS: "/home/jenkins/agent"
+        retentionStrategy: "always"
+    - permanent:
+        name: "agent2"
+        launcher: "inbound"
+        remoteFS: "/home/jenkins/agent"
+
+unclassified:
+  location:
+    adminAddress: ${ADMIN_EMAIL}
+    url: http://localhost:8080/
+
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleOnOver
+  
+  gitHubPluginConfig:
+    hookUrl: "http://jenkins:8080/github-webhook/"
+    configs:
+      - name: "GitHub"
+        apiUrl: "https://api.github.com"
+        credentialsId: "github-pat"
+        manageHooks: false
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              id: "github-pat"
+              username: "${GITHUB_USERNAME}"
+              password: "${GITHUB_TOKEN}"
+              description: "${GITHUB_USERNAME}'s personal access token"
+
+tool:
+  nodejs:
+    installations:
+      - name: Node 22.x
+        properties:
+          - installSource:
+              installers:
+                - nodeJSInstaller:
+                    id: 22.16.0
+                    npmPackagesRefreshHours: 72
+
+jobs:
+  - script: |
+      multibranchPipelineJob('jenkins-jcasc-example') {
+          branchSources {
+              github {
+                  id('jenkins-jcasc-example')
+                  repoOwner('cnunciato')
+                  repository('jenkins-jcasc-example')
+                  scanCredentialsId('github-pat')
+              }
+          }
+          factory {
+              workflowBranchProjectFactory {
+                  scriptPath('app/Jenkinsfile')
+              }
+          }
+          
+          configure { node ->
+              def traits = node / sources / data / 'jenkins.branch.BranchSource' / source / traits
+              traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+                  strategyId(3)
+              }
+          }
+      }
