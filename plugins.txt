@@ -1,0 +1,8 @@
+ansicolor:1.0.6
+configuration-as-code:1971.vf9280461ea_89
+github-branch-source:1822.v9eec8e5e69e3
+job-dsl:1.93
+nodejs:1.6.4
+role-strategy:777.v4fe2599cb_f48
+workflow-aggregator:608.v67378e9d3db_1
+workflow-multibranch:806.vb_b_688f609ee9

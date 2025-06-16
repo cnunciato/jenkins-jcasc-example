@@ -1,0 +1,3 @@
+steps:
+  - label: ":jenkins: Build and test the Jenkins cluster"
+    command: .buildkite/build-and-test.sh 
