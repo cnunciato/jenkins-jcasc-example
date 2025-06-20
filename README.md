@@ -2,7 +2,9 @@
 
 [![Build status](https://badge.buildkite.com/acefe7b66579afe6cb1f2bfcdae157ec1083b900f34a5ac490.svg)](https://buildkite.com/cnunciato/cnunciato-jenkins-jcasc-example)
 
-This repo shows how to configure a Jenkins cluster using [Jenkins Configuration as Code (JCasC)](https://buildkite.com/blog/automating-jenkins-with-jcasc-configuration-as-code). It includes a full setup with a Jenkins controller, inbound build agents, automated plugin installation,  and a sample application pipeline that fetches and builds this repository, all defined in code and managed with Docker and Docker Compose. There's even a public Buildkite pipeline ☝️ that tests the whole thing end to end.
+This repo shows how to configure a Jenkins cluster using [Jenkins Configuration as Code (JCasC)](https://buildkite.com/blog/automating-jenkins-with-jcasc-configuration-as-code). It includes a full setup with a Jenkins controller, inbound build agents, automated plugin installation,  and a sample application pipeline that fetches and builds this repository, all defined in code and managed with Docker and Docker Compose. 
+
+There's even a public [Buildkite](https://buildkite.com/) pipeline ☝️ that tests the whole thing end to end. ✨
 
 It's a companion repo to the Buildkite blog ["Automating Jenkins with Configuration as Code (JCasC)"](https://buildkite.com/blog/automating-jenkins-with-jcasc-configuration-as-code). 
 
